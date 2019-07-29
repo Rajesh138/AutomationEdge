@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="0" passed="0">
+  <reporter-output>
+    <line>
+      <![CDATA[=====Browser Session Started=====]]>
+    </line>
+    <line>
+      <![CDATA[=====Application Started=====]]>
+    </line>
+  </reporter-output>
+  <suite name="Suite" duration-ms="5" started-at="2019-07-12T05:45:05Z" finished-at="2019-07-12T05:45:05Z">
+    <groups>
+    </groups>
+    <test name="Test" duration-ms="5" started-at="2019-07-12T05:45:05Z" finished-at="2019-07-12T05:45:05Z">
+      <class name="com.automation.selenium.AELoginScript">
+        <test-method status="PASS" signature="loadPage()[pri:0, instance:com.automation.selenium.AELoginScript@3796751b]" name="loadPage" is-config="true" duration-ms="12346" started-at="2019-07-12T11:14:53Z" finished-at="2019-07-12T11:15:05Z">
+          <reporter-output>
+            <line>
+              <![CDATA[=====Browser Session Started=====]]>
+            </line>
+            <line>
+              <![CDATA[=====Application Started=====]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- loadPage -->
+        <test-method status="PASS" signature="closePage()[pri:0, instance:com.automation.selenium.AELoginScript@3796751b]" name="closePage" is-config="true" duration-ms="3344" started-at="2019-07-12T11:15:05Z" finished-at="2019-07-12T11:15:08Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closePage -->
+      </class> <!-- com.automation.selenium.AELoginScript -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
+</testng-results>
