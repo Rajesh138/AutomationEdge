@@ -203,7 +203,7 @@ public class BaseTest {
 	}
 
 	@AfterSuite
-	
+	(description="it will close all the browser instances")
 	public void closePage()
 	{
 	 webDriver.quit();
