@@ -21,7 +21,9 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
 import com.automation.commanutilities.BrowserFactory;
-
+/*
+ * Author : Tejaswini G
+ */
 public class BaseTest {
 	
 	BrowserFactory driver = new BrowserFactory();
@@ -203,6 +205,7 @@ public class BaseTest {
 	}
 
 	@AfterSuite
+	(description = "This method will close all the existing browser instances")
 	public void closePage()
 	{
 	 webDriver.quit();
