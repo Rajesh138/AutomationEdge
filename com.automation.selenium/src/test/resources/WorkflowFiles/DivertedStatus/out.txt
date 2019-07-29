@@ -1,0 +1,5 @@
+Student Name;Student id;address;HindiMarks
+swati;101.0;kharadi;87.0
+mayuri;102.0;kothrud;70.0
+aish;103.0;karve road;80.0
+darshana;104.0;satara road;75.0
