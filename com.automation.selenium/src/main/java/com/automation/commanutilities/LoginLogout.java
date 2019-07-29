@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-import com.automation.selenium.BaseTest;
+import com.automation.base.BaseTest;
 
 public class LoginLogout extends BaseTest{
 	WebDriver webDriver;

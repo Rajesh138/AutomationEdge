@@ -9,7 +9,7 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.automation.selenium.BaseTest;
-import com.thoughtworks.selenium.webdriven.commands.GetTitle;
+
 
 /**
  * @author Rajesh

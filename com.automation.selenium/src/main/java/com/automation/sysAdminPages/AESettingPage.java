@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.automation.selenium.BaseTest;
+import com.automation.base.BaseTest;
 
 
 public class AESettingPage extends BaseTest{

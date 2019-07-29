@@ -3,14 +3,13 @@
 <suite name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="com.automation.selenium.AeAgentsTest">
+      <class name="com.automation.testscript.ProcessStudioWF">
         <methods>
-          <include name="downloadRequests"/>
+          <include name="processStudio_WF"/>
           <include name="loadPage"/>
           <include name="closePage"/>
-          <include name="wfAssignToAgents"/>
         </methods>
-      </class> <!-- com.automation.selenium.AeAgentsTest -->
+      </class> <!-- com.automation.testscript.ProcessStudioWF -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

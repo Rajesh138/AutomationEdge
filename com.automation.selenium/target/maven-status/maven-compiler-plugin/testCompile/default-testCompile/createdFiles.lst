@@ -1,2 +1,2 @@
-com\automation\selenium\ProcessStudioWF.class
-com\automation\selenium\AELoginScript.class
+com\automation\testscript\AELoginTestScript.class
+com\automation\testscript\ProcessStudioWF.class

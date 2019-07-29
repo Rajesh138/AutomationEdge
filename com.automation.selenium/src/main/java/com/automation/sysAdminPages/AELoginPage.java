@@ -1,12 +1,13 @@
 package com.automation.sysAdminPages;
 
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-import com.automation.selenium.BaseTest;
+import com.automation.base.BaseTest;
 
 public class AELoginPage extends BaseTest {
 
@@ -37,12 +38,14 @@ public class AELoginPage extends BaseTest {
     @FindBy(how=How.NAME,using="save")
     WebElement resetPassword;
     
+ 
 
 	public void LoginAE() throws Exception {
 		username.sendKeys(getValue("Username"));
 		password.sendKeys(getValue("Password"));
-		signIn.click();		
-		Thread.sleep(100);
+		signIn.click();	
+		
+	   
 	
 	}
 

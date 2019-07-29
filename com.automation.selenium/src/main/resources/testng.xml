@@ -3,7 +3,7 @@
 <suite name="Suite">
   <test name="Test">
     <classes>
-      <class name="com.automation.selenium.AELoginScript"/>
+      <class name="com.automation.testscript.AELoginTestScript"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

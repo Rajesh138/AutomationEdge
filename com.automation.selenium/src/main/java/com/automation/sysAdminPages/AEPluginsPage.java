@@ -40,6 +40,7 @@ public class AEPluginsPage {
 	
 	@FindBy(name="submit")
 	WebElement clickOnSave;
+	
 	public String pluginUploadZip() throws Exception {
 		wait = new WebDriverWait(webDriver, 1000);
 		wait.until(ExpectedConditions.elementToBeClickable(pluginTab));
@@ -84,7 +85,7 @@ public class AEPluginsPage {
 		
 		Thread.sleep(10000);
 		uploadButton.click();
-		Thread.sleep(10000);
+		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("select-all")));
 		clickOnSelectall.click();
 		clickOnSave.click();
