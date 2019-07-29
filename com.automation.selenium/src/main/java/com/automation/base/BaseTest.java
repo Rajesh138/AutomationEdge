@@ -205,7 +205,7 @@ public class BaseTest {
 	}
 
 	@AfterSuite
-	(description = "This method will close all the existing browser instances")
+	
 	public void closePage()
 	{
 	 webDriver.quit();
