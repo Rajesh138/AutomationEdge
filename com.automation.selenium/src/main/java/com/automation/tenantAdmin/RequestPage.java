@@ -1,6 +1,5 @@
 package com.automation.tenantAdmin;
 
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -12,7 +11,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 
 import com.automation.base.BaseTest;
 
@@ -76,12 +74,11 @@ public class RequestPage extends BaseTest {
 			webDriver.findElement(By.xpath("//tbody[@class='tbody-stripped'][1]/tr/td[3]/span[2]")).click();
 			webDriver.findElement(By.xpath("//tbody[@class='tbody-stripped'][1]/tr[2]/td/div/span[1]")).getText();
 			String txtCount = getValue("OutputTextcount");
-			
-			//make folder to move the files
+
+			// make folder to move the files
 			destFolder = "D:\\Tejaswini_Workflow\\" + workflowID + workflowName;
 			new File(destFolder).mkdir();
-			
-			
+
 			outputMessageText((int) Float.parseFloat(txtCount));
 			// findLinkForDownload();
 		}
@@ -90,9 +87,7 @@ public class RequestPage extends BaseTest {
 	public String getStatus(String WFstatus) throws Exception {
 		while (WFstatus.equalsIgnoreCase("New") || WFstatus.contains("Started")) {
 			// System.out.println(status.getText());
-
 			getfluentWait(refresh);
-
 			refresh.click();
 			Thread.sleep(1000);
 			WFstatus = this.status.getText();
@@ -100,9 +95,14 @@ public class RequestPage extends BaseTest {
 		}
 		return WFstatus;
 	}
-
+  
+	
+	public void validateRequestMessage()
+	{
+		
+	}
 	public void outputMessageText(int Textcount) throws Exception {
-		for (int i = 3; i <= Textcount; i++) {
+		for (int i = 0; i <= Textcount; i++) {
 			String expectedResult = getValue("Resultparam" + i).trim();
 
 			String TextResult = webDriver
@@ -113,7 +113,7 @@ public class RequestPage extends BaseTest {
 					.findElement(By.xpath("//tbody[@class='tbody-stripped'][1]/tr[2]/td/div/span[2]/span[" + i + "]"));
 
 			List<WebElement> linkCount = block.findElements(By.tagName("a"));
-			if (linkCount.size() > 0) {
+			if (linkCount.size()> 0) {
 				List<WebElement> outputfile = block.findElements(By.tagName("b"));
 				String outputfilename = outputfile.get(0).getText();
 				String FileResult = outputfilename.replace(":", "").trim();
@@ -129,20 +129,22 @@ public class RequestPage extends BaseTest {
 					Thread.sleep(1000);
 					System.out.println(isFileDownloaded(downloadPath, FileResult));
 					if (isFileDownloaded(downloadPath, FileResult)) {
-                        //Path of source folder  
+						// Path of source folder
 						String srcFilePath = downloadPath + FileResult;
 						File srcFile = new File(srcFilePath);
-						
-						//path of destination folder
-						String destFile= destFolder	+ "\\"+ srcFile.getName();
+
+						// path of destination folder
+						String destFile = destFolder + "\\" + srcFile.getName();
 						File destinationFolder = new File(destFile);
-				        
-						//move file to destination folder and check isFilePresent
+
+						// move file to destination folder and check
+						// isFilePresent
 						boolean renameResult = srcFile.renameTo(destinationFolder);
 						System.out.println("Use java io to move from " + srcFilePath + " to " + destinationFolder);
 						if (renameResult) {
 							System.out.println(" success. ");
-							compareDownloadedFiles(destFile,System.getProperty("user.dir") + "/src/test/resources/WorkflowFiles/"+getValue("Resultparam"+i));
+							compareDownloadedFiles(destFile, System.getProperty("user.dir")
+									+ "/src/test/resources/WorkflowFiles/" + getValue("Resultparam" + i));
 						} else {
 							System.out.println(" fail. ");
 						}
@@ -189,8 +191,7 @@ public class RequestPage extends BaseTest {
 			if (line1 == null || line2 == null) {
 				areEqual = false;
 				break;
-			} 
-			else if (!line1.equalsIgnoreCase(line2)) {
+			} else if (!line1.equalsIgnoreCase(line2)) {
 				areEqual = false;
 				break;
 			}

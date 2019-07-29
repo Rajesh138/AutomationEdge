@@ -20,7 +20,7 @@ public class ProcessStudioWF extends BaseTest {
 		clearHash();
 	}
 
-	@Test(priority = 2)
+	//@Test(priority = 2)
 	public void PS_WF_diverted() throws Exception {
 		loadTestData("/WorkflowDetails");
 		getKey("WF001");
