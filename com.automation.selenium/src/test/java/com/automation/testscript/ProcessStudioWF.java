@@ -1,9 +1,6 @@
 package com.automation.testscript;
 
-import javax.management.DescriptorKey;
-
 import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.Guice;
 import org.testng.annotations.Test;
 
 import com.automation.base.BaseTest;
@@ -15,24 +12,37 @@ public class ProcessStudioWF extends BaseTest {
 	String expectedResult = "Success";
 	  
 	  
-	@Test(priority = 1, groups={"mandatory","functional"})
+	@Test(priority = 1)
 	public void S017_loginTenantadmin() throws Exception {
 		getKey("S017");
 		AELoginPage aelogin = PageFactory.initElements(webDriver, AELoginPage.class);
 		aelogin.LoginAE();
 		clearHash();
+		loadTestData("/WorkflowDetails");
 	}
 
-	//@Test(priority = 2)
+	@Test(priority = 2)
 	public void PS_WF_diverted() throws Exception {
-		loadTestData("/WorkflowDetails");
+		
 		getKey("WF001");
 		WorkflowPage workflow = PageFactory.initElements(webDriver, WorkflowPage.class);
 		workflow.getWorkflowResult();
 	}
-	@Test(priority = 3, description="TestCaseID : WF002")
-	public void PS_WF_diverted1() throws Exception {
+	@Test(priority = 3)
+	public void PS_WF_Message() throws Exception {
 		getKey("WF002");
+		WorkflowPage workflow = PageFactory.initElements(webDriver, WorkflowPage.class);
+		workflow.getWorkflowResult();
+	}
+	@Test(priority = 4)
+	public void PS_WF_configRun() throws Exception {
+		getKey("WF003");
+		WorkflowPage workflow = PageFactory.initElements(webDriver, WorkflowPage.class);
+		workflow.getWorkflowResult();
+	}
+	@Test(priority = 5)
+	public void PS_WF_integer() throws Exception {
+		getKey("WF004");
 		WorkflowPage workflow = PageFactory.initElements(webDriver, WorkflowPage.class);
 		workflow.getWorkflowResult();
 	}

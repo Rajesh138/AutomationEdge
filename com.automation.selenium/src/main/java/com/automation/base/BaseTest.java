@@ -3,8 +3,6 @@ package com.automation.base;
 import java.io.FileInputStream;
 import java.time.Duration;
 import java.util.Hashtable;
-import java.util.List;
-
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -13,53 +11,51 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
+import org.apache.poi.ss.usermodel.DataFormatter;
 
 import com.automation.commanutilities.BrowserFactory;
-import com.automation.sysAdminPages.AELoginPage;
 
-/*
- * Author : Tejaswini G
- */
 public class BaseTest {
-	
+
 	BrowserFactory driver = new BrowserFactory();
 
 	protected static WebDriver webDriver;
-	FileInputStream excelFileIS;;
+	FileInputStream excelFileIS;
 	XSSFWorkbook workbook;
 	XSSFSheet sheet;
 	private int intNoOfRow;
 	private int intIndex = 0;
 	int intNoOfColumn;
-	
+
 	Hashtable<String, Hashtable<String, String>> testDataTable = new Hashtable<String, Hashtable<String, String>>();
 	static Hashtable<String, String> ElementValue = new Hashtable<String, String>();
-		public String loadTestData(String testDataFilePath) throws Exception {
+
+	public String loadTestData(String testDataFilePath) throws Exception {
 
 		testDataFilePath = System.getProperty("user.dir") + "/src/test/resources/testData" + testDataFilePath + ".xlsx";
-		//System.out.println(testDataFilePath);
+		// System.out.println(testDataFilePath);
 		Row headerRow;
 		Row testDataRow;
+		DataFormatter dataFormatter = null;
 		excelFileIS = new FileInputStream(testDataFilePath);
 		workbook = new XSSFWorkbook(excelFileIS);
 		sheet = workbook.getSheetAt(0);
+		dataFormatter = new DataFormatter();
 		intNoOfRow = sheet.getPhysicalNumberOfRows();
-         //System.out.println(intNoOfRow+""+intIndex);
+		// System.out.println(intNoOfRow+""+intIndex);
 		while (intIndex < intNoOfRow) {
 
 			org.apache.poi.ss.usermodel.Row row = null;
 			org.apache.poi.ss.usermodel.Cell cell = null;
 			row = sheet.getRow(intIndex);
 			cell = row.getCell(0);
-			String CellValue = cell.toString().trim();
+			String CellValue = dataFormatter.formatCellValue(cell).trim();
 			// System.out.println(CellValue);
 
 			if (CellValue.equalsIgnoreCase("TC ID")) {
@@ -81,19 +77,18 @@ public class BaseTest {
 						header = this.getCellValue(headerRow, clmNo);
 						// Value
 						testData = this.getCellValue(testDataRow, clmNo);
-						//System.out.println("key="+header+"value="+testData);
+						// System.out.println("key="+header+"value="+testData);
 					}
 
 					if (!header.equals(""))
 						dataValueSet.put(header, testData);
-					// System.out.println("keyvalue pair
-					// hashmap=="+dataValueSet);
+					
 					clmNo++;
 				} while (clmNo < headerRow.getLastCellNum());
 				// put the hash-table in list
 
 				testDataTable.put(hashTableTestCaseID, dataValueSet);
-				//System.out.println(testDataTable);
+				// System.out.println(testDataTable);
 				dataValueSet = null;
 			}
 			intIndex++;
@@ -104,30 +99,30 @@ public class BaseTest {
 	}
 
 	public void getKey(String TestCaseID) {
-		
-		//System.out.println("get Hash function" + testDataTable);
-		for(String hashKeyValue : testDataTable.keySet()) {
-               //System.out.println("hash key value"+hashKeyValue);
+
+		// System.out.println("get Hash function" + testDataTable);
+		for (String hashKeyValue : testDataTable.keySet()) {
+			// System.out.println("hash key value"+hashKeyValue);
 			if (hashKeyValue.equalsIgnoreCase(TestCaseID)) {
-				//System.out.println("eeeeeee" + hashKeyValue);
+				// System.out.println("eeeeeee" + hashKeyValue);
 				ElementValue = testDataTable.get(hashKeyValue);
-				 //System.out.println(ElementValue);
+				// System.out.println(ElementValue);
 			}
 		}
-	
+
 	}
 
 	public static String getValue(String Key) {
 		String elementValue = ElementValue.get(Key);
 
-		//System.out.println("show key " + elementValue);
+		System.out.println("show key " + elementValue);
 		return elementValue;
 	}
 
 	String getCellValue(Row testDataRow, int columnNumber) {
-
+		DataFormatter dataFormatter = new DataFormatter();
 		Cell testDataCell = testDataRow.getCell(columnNumber);
-		return testDataCell.toString().trim();
+		return dataFormatter.formatCellValue(testDataCell).trim();
 
 	}
 
@@ -145,7 +140,7 @@ public class BaseTest {
 		org.apache.poi.ss.usermodel.Cell cell = null;
 		row = sheet.getRow(intIndex);
 		intNoOfColumn = row.getPhysicalNumberOfCells();
-		//System.out.println(intNoOfColumn);
+		// System.out.println(intNoOfColumn);
 		try {
 			cell = row.getCell(clmNo);
 			System.out.println(cell);
@@ -162,122 +157,50 @@ public class BaseTest {
 		}
 		return strCellvalue;
 	}
-	
-	
-	public static boolean isClickable(By tab, WebDriver driver) 
-	{
-		
+
+	public static boolean isClickable(By tab, WebDriver driver) {
+
 		WebDriverWait wait = new WebDriverWait(driver, 10);
-			 if(wait.until(ExpectedConditions.elementToBeClickable(tab)) != null){
-			
+		if (wait.until(ExpectedConditions.elementToBeClickable(tab)) != null) {
+
 			driver.findElement(tab).click();
 			System.out.println("false");
 			return false;
-			
-		}
-		else {
+
+		} else {
 			System.out.println("true");
 			return true;
-			
+
 		}
 	}
-	
-	public void clearHash(){
+
+	public void clearHash() {
 		testDataTable.clear();
 		ElementValue.clear();
-		intIndex=0;
+		intIndex = 0;
 	}
-	
-	public WebElement getfluentWait(WebElement value){
-			
-			Wait wait = new FluentWait(webDriver)
-			.withTimeout(Duration.ofSeconds(50))
-			.pollingEvery(Duration.ofSeconds(10))
-			.ignoring(NoSuchElementException.class);
-			System.out.println( "check fluent wait"+wait.until(ExpectedConditions.visibilityOf(value)));
-			
-			return null;
-		
-	}
-	/*
-	 * Added by Rajesh
-	 */
-	
-	public boolean selectDropDownOption(WebElement element, String option, String... selectType){
-		
-	try	{
-			
-			org.openqa.selenium.support.ui.Select sltDropDown = new org.openqa.selenium.support.ui.Select(element);
 
-			if(selectType.length > 0 && !selectType[0].equals(""))
-			{
-				if(selectType[0].equalsIgnoreCase("Value"))
-					sltDropDown.selectByValue(option);
-				else if(selectType[0].equalsIgnoreCase("Text"))
-					sltDropDown.selectByVisibleText(option);
-				else if(selectType[0].equalsIgnoreCase("Index"))
-					sltDropDown.selectByIndex(Integer.parseInt(option));
-				
-				return true;
-			}
-			else
-			{
-				// Web elements from dropdown list 
-				List<WebElement> options = sltDropDown.getOptions();
-				boolean blnOptionAvailable = false;
-				int iIndex = 0;
-				for(WebElement weOptions : options)  
-				{  
-					if (weOptions.getText().trim().equals(option))
-					{
-						sltDropDown.selectByIndex(iIndex);
-						blnOptionAvailable = true;
-						break;
-					}
-					else
-						iIndex++;
-				}
-				 
-				return blnOptionAvailable;
-			}
+	public WebElement getfluentWait(WebElement value) {
+
+		Wait wait = new FluentWait(webDriver).withTimeout(Duration.ofSeconds(50)).pollingEvery(Duration.ofSeconds(10))
+				.ignoring(NoSuchElementException.class);
+		return null;
 	}
-	catch (Exception exception)
-	{
-		exception.printStackTrace();
-		return false;
-	}
-	}
-	
-	
+
 	@BeforeSuite
 	public void loadPage() throws Exception {
 
 		webDriver = driver.startBrowser("Chrome", "http://10.51.29.24:8080/aeui/#/login");
 		loadTestData("/SysadminTestData");
 	}
-	
-	/*
-	 * Rajesh
-	 * 
-	 */
-	/*@BeforeClass
-	public void tenantAdminLogin() throws Exception{
-		
-		getKey("S017");
-		AELoginPage aelogin = PageFactory.initElements(webDriver, AELoginPage.class);
-		aelogin.LoginAE();
-	}*/
 
 	@AfterSuite
-	(description="it will close all the browser instances")
-	public void closePage()
-	{
-	 webDriver.quit();
+	public void closePage() {
+		webDriver.quit();
 	}
-	
-	public void pendDate()
-	{
-		
+
+	public void pendDate() {
+
 	}
-	
+
 }

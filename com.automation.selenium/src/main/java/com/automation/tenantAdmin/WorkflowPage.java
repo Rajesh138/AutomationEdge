@@ -3,6 +3,9 @@
  */
 package com.automation.tenantAdmin;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -70,17 +73,16 @@ public class WorkflowPage extends BaseTest {
 
 	public void getWorkflowResult() throws Exception {
 
-		 createWorkflow();
-		 updateWorkflow();
-		 activateWorkflow();
+		createWorkflow();
+		updateWorkflow();
+		activateWorkflow();
 
 		// AssignWorkflowToAgent Class object to load the function
-		 AssignWorkflowToAgent agent = PageFactory.initElements(webDriver,
-		 AssignWorkflowToAgent.class);
-		 agent.assignWorkflowToAgent();
+		AssignWorkflowToAgent agent = PageFactory.initElements(webDriver, AssignWorkflowToAgent.class);
+		agent.assignWorkflowToAgent();
 
 		// navigate to Catelog and submit the request
-		
+
 		CataloguePage catelogue = PageFactory.initElements(webDriver, CataloguePage.class);
 		catelogue.submitRequest();
 
@@ -93,7 +95,7 @@ public class WorkflowPage extends BaseTest {
 		wait = new WebDriverWait(webDriver, 5000);
 		wait.until(ExpectedConditions.elementToBeClickable(workflowTab));
 		workflowTab.click();
-        getfluentWait(importButton);
+		getfluentWait(importButton);
 		importButton.click();
 
 		wait.until(ExpectedConditions.elementToBeClickable(workflowName));
@@ -101,9 +103,10 @@ public class WorkflowPage extends BaseTest {
 		description.sendKeys(getValue("description"));
 		uploadZip.click();
 
-		String filePath =System.getProperty("user.dir") + "\\src\\test\\resources\\WorkflowFiles\\"+ getValue("zip_path");
+		String filePath = System.getProperty("user.dir") + "\\src\\test\\resources\\WorkflowFiles\\"
+				+ getValue("zip_path");
 		String autoIt_file_path = "D:\\AutoITSetup\\AE_ChooseFile.exe " + filePath;
-        
+
 		System.out.println(autoIt_file_path);
 		Thread.sleep(200);
 		Runtime.getRuntime().exec(autoIt_file_path);
@@ -117,6 +120,23 @@ public class WorkflowPage extends BaseTest {
 	public void updateWorkflow() {
 		maxCompletionTime.sendKeys("300");
 		expectedCompletionTime.sendKeys("200");
+
+		WebElement config = webDriver.findElement(By.xpath("//*[@id='wf-form']/fieldset[3]"));
+		config.click();
+		// System.out.println("no of config"+config.getSize());
+		List<WebElement> tags = config.findElements(By.tagName("input"));
+		System.out.println("no of " + tags.size());
+		if (tags.size() > 0) {
+			System.out.println("inside");
+			int count = 0;
+			for (int i = 1; i <= tags.size(); i++) {
+				System.out.println("inside" + i);
+				// System.out.println(tags.get(i).getText());
+				tags.get(count).sendKeys(getValue("configParam" + i));
+				count++;
+			}
+		}
+
 		submit.click();
 		setResult = getMessage.getText();
 		System.out.println(setResult);

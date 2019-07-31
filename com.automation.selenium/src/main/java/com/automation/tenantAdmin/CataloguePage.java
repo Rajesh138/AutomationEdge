@@ -5,7 +5,9 @@ package com.automation.tenantAdmin;
 
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,6 +25,7 @@ public class CataloguePage extends BaseTest {
 	WebDriverWait wait;
 	WebDriver webDriver;
 	String setResult;
+	List<WebElement> paramsBlock;
 
 	public CataloguePage(WebDriver webDriver) {
 		this.webDriver = webDriver;
@@ -63,11 +66,32 @@ public class CataloguePage extends BaseTest {
 		wait.until(ExpectedConditions.elementToBeClickable(selectWF));
 		selectWF.click();
 		Thread.sleep(2000);
+		
+		//Identify Runtime params
+		WebElement runtime= webDriver.findElement(By.xpath("//div[@class='card-body divider request-details']/div[2]"));
+	    paramsBlock= runtime.findElements(By.tagName("input"));
+		int paramscount=paramsBlock.size();
+		System.out.println(paramscount);
+		
+		if(paramscount>0){
+			System.out.println("inside");
+			enteRuntimeValue(paramscount);
+		}
+		
+		System.out.println(paramsBlock.size());
 		submit.click();
 		popupOk.click();
 		
 		
 	}
-	
+	public void enteRuntimeValue(int paramscount){
+		int count=0;
+		for(int i= 1;i<=paramscount;i++){	
+			System.out.println("inside"+i);
+			paramsBlock.get(count).sendKeys(getValue("runParams"+i));
+			count++;
+		}
+		
+	}
 	
 }
