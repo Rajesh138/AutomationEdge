@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" total="3" passed="3">
+<testng-results skipped="0" failed="0" total="2" passed="2">
   <reporter-output>
     <line>
       <![CDATA[=====Browser Session Started=====]]>
@@ -8,12 +8,12 @@
       <![CDATA[=====Application Started=====]]>
     </line>
   </reporter-output>
-  <suite name="Default suite" duration-ms="110927" started-at="2019-07-29T06:16:39Z" finished-at="2019-07-29T06:18:30Z">
+  <suite name="Default suite" duration-ms="5301" started-at="2019-07-30T13:17:48Z" finished-at="2019-07-30T13:17:53Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="110927" started-at="2019-07-29T06:16:39Z" finished-at="2019-07-29T06:18:30Z">
-      <class name="com.automation.testscript.ProcessStudioWF">
-        <test-method status="PASS" signature="loadPage()[pri:0, instance:com.automation.testscript.ProcessStudioWF@4678c730]" name="loadPage" is-config="true" duration-ms="7007" started-at="2019-07-29T11:46:32Z" finished-at="2019-07-29T11:46:39Z">
+    <test name="Default test" duration-ms="5301" started-at="2019-07-30T13:17:48Z" finished-at="2019-07-30T13:17:53Z">
+      <class name="com.automation.testscript.verifyRequestAttributeValue">
+        <test-method status="PASS" signature="loadPage()[pri:0, instance:com.automation.testscript.verifyRequestAttributeValue@8bd1b6a]" name="loadPage" is-config="true" duration-ms="11370" started-at="2019-07-30T18:47:37Z" finished-at="2019-07-30T18:47:48Z">
           <reporter-output>
             <line>
               <![CDATA[=====Browser Session Started=====]]>
@@ -23,23 +23,23 @@
             </line>
           </reporter-output>
         </test-method> <!-- loadPage -->
-        <test-method status="PASS" signature="S017_loginTenantadmin()[pri:0, instance:com.automation.testscript.ProcessStudioWF@4678c730]" name="S017_loginTenantadmin" duration-ms="232" started-at="2019-07-29T11:46:39Z" finished-at="2019-07-29T11:46:39Z">
+        <test-method status="PASS" signature="tenantAdminLogin()[pri:0, instance:com.automation.testscript.verifyRequestAttributeValue@8bd1b6a]" name="tenantAdminLogin" is-config="true" duration-ms="279" started-at="2019-07-30T18:47:48Z" finished-at="2019-07-30T18:47:48Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- S017_loginTenantadmin -->
-        <test-method status="PASS" signature="PS_WF_diverted()[pri:0, instance:com.automation.testscript.ProcessStudioWF@4678c730]" name="PS_WF_diverted" duration-ms="57994" started-at="2019-07-29T11:46:39Z" finished-at="2019-07-29T11:47:37Z">
+        </test-method> <!-- tenantAdminLogin -->
+        <test-method status="PASS" signature="verifyCheckAllaOption()[pri:0, instance:com.automation.testscript.verifyRequestAttributeValue@8bd1b6a]" name="verifyCheckAllaOption" duration-ms="3935" started-at="2019-07-30T18:47:48Z" description="Verify check alla option" finished-at="2019-07-30T18:47:52Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- PS_WF_diverted -->
-        <test-method status="PASS" signature="PS_WF_diverted1()[pri:0, instance:com.automation.testscript.ProcessStudioWF@4678c730]" name="PS_WF_diverted1" duration-ms="52680" started-at="2019-07-29T11:47:37Z" finished-at="2019-07-29T11:48:30Z">
+        </test-method> <!-- verifyCheckAllaOption -->
+        <test-method status="PASS" signature="verifyDefaultOptions()[pri:0, instance:com.automation.testscript.verifyRequestAttributeValue@8bd1b6a]" name="verifyDefaultOptions" duration-ms="1073" started-at="2019-07-30T18:47:52Z" description="Testcase for :: Verify default options get selected or not" finished-at="2019-07-30T18:47:53Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- PS_WF_diverted1 -->
-        <test-method status="PASS" signature="closePage()[pri:0, instance:com.automation.testscript.ProcessStudioWF@4678c730]" name="closePage" is-config="true" duration-ms="821" started-at="2019-07-29T11:48:30Z" finished-at="2019-07-29T11:48:31Z">
+        </test-method> <!-- verifyDefaultOptions -->
+        <test-method status="PASS" signature="closePage()[pri:0, instance:com.automation.testscript.verifyRequestAttributeValue@8bd1b6a]" name="closePage" is-config="true" duration-ms="1195" started-at="2019-07-30T18:47:53Z" description="it will close all the browser instances" finished-at="2019-07-30T18:47:55Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closePage -->
-      </class> <!-- com.automation.testscript.ProcessStudioWF -->
+      </class> <!-- com.automation.testscript.verifyRequestAttributeValue -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

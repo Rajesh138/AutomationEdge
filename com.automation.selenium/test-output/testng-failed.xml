@@ -3,13 +3,15 @@
 <suite name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="com.automation.testscript.ProcessStudioWF">
+      <class name="com.automation.testscript.verifyRequestAttributeValue">
         <methods>
-          <include name="processStudio_WF"/>
+          <include name="verifyDefaultOptions"/>
+          <include name="verifyCheckAllaOption"/>
+          <include name="tenantAdminLogin"/>
           <include name="loadPage"/>
           <include name="closePage"/>
         </methods>
-      </class> <!-- com.automation.testscript.ProcessStudioWF -->
+      </class> <!-- com.automation.testscript.verifyRequestAttributeValue -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

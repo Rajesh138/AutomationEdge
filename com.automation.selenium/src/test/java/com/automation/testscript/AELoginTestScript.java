@@ -25,7 +25,7 @@ public class AELoginTestScript extends BaseTest {
 		aelogin.resetPassword();
 	}
 	
-	@Test(priority = 2)
+	@Test(priority = 2, groups={"functional","smoke"})
 	public void verifyLogin_S002() throws Exception {
 		
 		getKey("S001");

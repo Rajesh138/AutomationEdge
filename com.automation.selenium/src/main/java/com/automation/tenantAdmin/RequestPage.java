@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.automation.base.BaseTest;
@@ -27,10 +27,11 @@ public class RequestPage extends BaseTest {
 	String workflowName;
 	String requestvalue;
 	String destFolder;
-	private static String downloadPath = "D:\\Tejaswini_Workflow\\DownloadedFile\\";
+	private static String downloadPath = "..\\com.automation.selenium\\src\\downloads";
 
 	public RequestPage(WebDriver webDriver) {
 		this.webDriver = webDriver;
+		// PageFactory.initElements(webDriver,"");
 	}
 
 	@FindBy(linkText = "Requests")
@@ -41,6 +42,13 @@ public class RequestPage extends BaseTest {
 
 	@FindBy(name = "refresh-btn")
 	WebElement refresh;
+
+	@FindBy(xpath = "//*[@id='selectedColumns']/div/button")
+	WebElement showColumnsButton;
+
+	/*
+	 * @FindBy(tagName="a") WebElement showColumnOptions;
+	 */
 
 	public void checkWorkflowStatus() throws Exception {
 		getfluentWait(requestsTab);
@@ -95,12 +103,11 @@ public class RequestPage extends BaseTest {
 		}
 		return WFstatus;
 	}
-  
-	
-	public void validateRequestMessage()
-	{
-		
+
+	public void validateRequestMessage() {
+
 	}
+
 	public void outputMessageText(int Textcount) throws Exception {
 		for (int i = 0; i <= Textcount; i++) {
 			String expectedResult = getValue("Resultparam" + i).trim();
@@ -113,7 +120,7 @@ public class RequestPage extends BaseTest {
 					.findElement(By.xpath("//tbody[@class='tbody-stripped'][1]/tr[2]/td/div/span[2]/span[" + i + "]"));
 
 			List<WebElement> linkCount = block.findElements(By.tagName("a"));
-			if (linkCount.size()> 0) {
+			if (linkCount.size() > 0) {
 				List<WebElement> outputfile = block.findElements(By.tagName("b"));
 				String outputfilename = outputfile.get(0).getText();
 				String FileResult = outputfilename.replace(":", "").trim();
@@ -215,6 +222,32 @@ public class RequestPage extends BaseTest {
 
 		reader2.close();
 		return areEqual;
+	}
+
+	public void selectShowcolumnOptionButton() throws InterruptedException {
+		getfluentWait(requestsTab);
+		requestsTab.click();
+		getfluentWait(showColumnsButton);
+		showColumnsButton.click();
+		Thread.sleep(1000);
+		// selectDropDownOption(showColumnsButton, "Check all", "Text");
+	}
+
+	public void selectShowcolumnOptions(int optionIndex) {
+		WebElement columnOpt = webDriver.findElement(By.xpath("//*[@id='selectedColumns']/div/ul"));
+		// System.out.println("Total options are : "+columnOpt.getSize());
+		List<WebElement> li_tags = columnOpt.findElements(By.tagName("li"));
+		// System.out.println(li_tags.size());
+		int value = li_tags.size();
+		for (int i = 0; i < value; i++) {
+			String optText = li_tags.get(i).getText();
+			System.out.println("---show column options----" + optText);
+
+			WebElement selectOpt = li_tags.get(optionIndex);
+			selectOpt.click();
+
+		}
+
 	}
 
 }
