@@ -11,15 +11,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import org.apache.poi.ss.usermodel.DataFormatter;
 
 import com.automation.commanutilities.BrowserFactory;
+import com.automation.sysAdminPages.AELoginPage;
 
 public class BaseTest {
 
@@ -186,6 +189,15 @@ public class BaseTest {
 				.ignoring(NoSuchElementException.class);
 		return null;
 	}
+	@BeforeClass(description="This is Tenant Admin Login function")
+	
+	public void S017_loginTenantadmin() throws Exception {
+		getKey("S017");
+		AELoginPage aelogin = PageFactory.initElements(webDriver, AELoginPage.class);
+		aelogin.LoginAE();
+		clearHash();
+		loadTestData("/WorkflowDetails");
+	}
 
 	@BeforeSuite
 	public void loadPage() throws Exception {
@@ -196,7 +208,11 @@ public class BaseTest {
 
 	@AfterSuite
 	public void closePage() {
-		webDriver.quit();
+		try {
+			webDriver.quit();
+		} finally {
+			// TODO: handle finally clause
+		}
 	}
 
 	public void pendDate() {

@@ -29,7 +29,7 @@ public class RequestPage extends BaseTest {
 	String requestvalue;
 	String destFolder;
 	String workflowMessage;
-	private static String downloadPath = "D:\\Tejaswini_Workflow\\DownloadedFile\\";
+	private static String downloadPath = "..\\com.automation.selenium\\src\\downloads";
 
 	public RequestPage(WebDriver webDriver) {
 		this.webDriver = webDriver;
@@ -43,6 +43,9 @@ public class RequestPage extends BaseTest {
 
 	@FindBy(name = "refresh-btn")
 	WebElement refresh;
+	
+	@FindBy(xpath = "//*[@id='selectedColumns']/div/button")
+	WebElement showColumnsButton;
 
 	public void checkWorkflowStatus() throws Exception {
 		getfluentWait(requestsTab);
@@ -234,5 +237,34 @@ public class RequestPage extends BaseTest {
 		reader2.close();
 		return areEqual;
 	}
+	
+	
+	//Rajesh
+	public void selectShowcolumnOptionButton() throws InterruptedException {
+		getfluentWait(requestsTab);
+		requestsTab.click();
+		getfluentWait(showColumnsButton);
+		showColumnsButton.click();
+		Thread.sleep(1000);
+		// selectDropDownOption(showColumnsButton, "Check all", "Text");
+	}
+
+	public void selectShowcolumnOptions(int optionIndex) {
+		WebElement columnOpt = webDriver.findElement(By.xpath("//*[@id='selectedColumns']/div/ul"));
+		// System.out.println("Total options are : "+columnOpt.getSize());
+		List<WebElement> li_tags = columnOpt.findElements(By.tagName("li"));
+		// System.out.println(li_tags.size());
+		int value = li_tags.size();
+		for (int i = 0; i < value; i++) {
+			String optText = li_tags.get(i).getText();
+			System.out.println("---show column options----" + optText);
+
+			WebElement selectOpt = li_tags.get(optionIndex);
+			selectOpt.click();
+
+		}
+
+	}
+
 
 }

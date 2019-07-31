@@ -3,13 +3,14 @@
 <suite name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="com.automation.testscript.ProcessStudioWF">
+      <class name="com.automation.testscript.verifyRequestPageTestScript">
         <methods>
-          <include name="PS_WF_diverted1"/>
+          <include name="verifyCheckAllaOption"/>
+          <include name="verifyDefaultOptions"/>
           <include name="loadPage"/>
           <include name="closePage"/>
         </methods>
-      </class> <!-- com.automation.testscript.ProcessStudioWF -->
+      </class> <!-- com.automation.testscript.verifyRequestPageTestScript -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
