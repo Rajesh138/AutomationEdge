@@ -1,8 +1,12 @@
 package com.automation.base;
 
 import java.io.FileInputStream;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 import java.util.Hashtable;
+import java.util.Properties;
+
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -16,6 +20,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
@@ -29,12 +35,14 @@ public class BaseTest {
 	BrowserFactory driver = new BrowserFactory();
 
 	protected static WebDriver webDriver;
+	private Properties appConfig;
 	FileInputStream excelFileIS;
 	XSSFWorkbook workbook;
 	XSSFSheet sheet;
 	private int intNoOfRow;
 	private int intIndex = 0;
 	int intNoOfColumn;
+	protected org.apache.log4j.Logger log;
 
 	Hashtable<String, Hashtable<String, String>> testDataTable = new Hashtable<String, Hashtable<String, String>>();
 	static Hashtable<String, String> ElementValue = new Hashtable<String, String>();
@@ -85,7 +93,7 @@ public class BaseTest {
 
 					if (!header.equals(""))
 						dataValueSet.put(header, testData);
-					
+
 					clmNo++;
 				} while (clmNo < headerRow.getLastCellNum());
 				// put the hash-table in list
@@ -189,14 +197,34 @@ public class BaseTest {
 				.ignoring(NoSuchElementException.class);
 		return null;
 	}
-	@BeforeClass(description="This is Tenant Admin Login function")
 	
-	public void S017_loginTenantadmin() throws Exception {
-		getKey("S017");
-		AELoginPage aelogin = PageFactory.initElements(webDriver, AELoginPage.class);
-		aelogin.LoginAE();
-		clearHash();
-		loadTestData("/WorkflowDetails");
+	
+	 @BeforeClass(description = "This is Tenant Admin Login function")
+	 public void S017_loginTenantadmin() throws Exception { getKey("S017");
+	 AELoginPage aelogin = PageFactory.initElements(webDriver,
+	 AELoginPage.class); aelogin.LoginAE(); clearHash();
+	 loadTestData("/WorkflowDetails"); }
+	  
+	 
+
+	@AfterMethod
+	public void getResult(ITestResult result) {
+		int status = result.getStatus();
+
+	    switch (status) {
+	        case ITestResult.SUCCESS:
+	        	System.out.println("Success method" +result.getMethod().getMethodName());
+	            break;
+	        case ITestResult.FAILURE:
+	            System.out.println("Failed method" +result.getMethod().getMethodName());
+	            break;
+	        case ITestResult.SKIP:
+	        	System.out.println("Skipped methods" +result.getMethod().getMethodName());
+	            break;
+	        default:
+	            throw new RuntimeException("Invalid status");
+	}
+	    
 	}
 
 	@BeforeSuite
@@ -204,15 +232,13 @@ public class BaseTest {
 
 		webDriver = driver.startBrowser("Chrome", "http://10.51.29.24:8080/aeui/#/login");
 		loadTestData("/SysadminTestData");
+
 	}
 
 	@AfterSuite
 	public void closePage() {
-		try {
-			webDriver.quit();
-		} finally {
-			// TODO: handle finally clause
-		}
+
+		webDriver.quit();
 	}
 
 	public void pendDate() {

@@ -29,6 +29,7 @@ public class RequestPage extends BaseTest {
 	String requestvalue;
 	String destFolder;
 	String workflowMessage;
+	protected org.apache.log4j.Logger log;
 	private static String downloadPath = "..\\com.automation.selenium\\src\\downloads";
 
 	public RequestPage(WebDriver webDriver) {
@@ -43,16 +44,24 @@ public class RequestPage extends BaseTest {
 
 	@FindBy(name = "refresh-btn")
 	WebElement refresh;
-	
+
 	@FindBy(xpath = "//*[@id='selectedColumns']/div/button")
 	WebElement showColumnsButton;
+
+	@FindBy(xpath = "//*[@name='download-requests']")
+	WebElement downloadRequestButton;
+
+	@FindBy(xpath = "//*[@id='downloadBtn']/span")
+	WebElement requestDownload;
+	@FindBy(xpath="//*[@id='downloadModal']/div/div/form/div[2]/button[2]")
+	WebElement requestCancelButton;
 
 	public void checkWorkflowStatus() throws Exception {
 		getfluentWait(requestsTab);
 		requestsTab.click();
 		webDriver.findElement(By.xpath("//tbody[@class='tbody-stripped']"));
 		List<WebElement> getCol = webDriver.findElements(By.xpath("//tbody[@class='tbody-stripped'][1]/tr/td"));
-		//System.out.println("No of columns" + getCol.size());
+		// System.out.println("No of columns" + getCol.size());
 
 		int count = 0;
 		for (int col = 1; col < getCol.size(); col++) {
@@ -60,10 +69,10 @@ public class RequestPage extends BaseTest {
 					.getText();
 			if (count == 0) {
 				workflowID = requestvalue;
-				//System.out.println(workflowID);
+				// System.out.println(workflowID);
 			} else if (count == 1) {
 				workflowName = requestvalue;
-				//System.out.println(workflowName);
+				// System.out.println(workflowName);
 			}
 			count++;
 		}
@@ -73,13 +82,13 @@ public class RequestPage extends BaseTest {
 		System.out.println("Final Status=" + WFstatus);
 
 		if (WFstatus.equalsIgnoreCase(getValue("ResultStatus"))) {
-			//System.out.println("check the result");
+			// System.out.println("check the result");
 			webDriver.findElement(By.xpath("//tbody[@class='tbody-stripped'][1]/tr/td[3]/span[2]")).click();
 
 			// if message is correct then only check all details
 			if (validateRequestMessage()) {
 				String txtCount = getValue("OutputTextcount");
-				//System.out.println(txtCount);
+				// System.out.println(txtCount);
 				// make folder to move the files
 				destFolder = "D:\\Tejaswini_Workflow\\" + workflowID + workflowName;
 				new File(destFolder).mkdir();
@@ -160,7 +169,8 @@ public class RequestPage extends BaseTest {
 							// move file to destination folder and check
 							// isFilePresent
 							boolean renameResult = srcFile.renameTo(destinationFolder);
-							//System.out.println("Use java io to move from " + srcFilePath + " to " + destinationFolder);
+							// System.out.println("Use java io to move from " +
+							// srcFilePath + " to " + destinationFolder);
 							if (renameResult) {
 								System.out.println(" success. ");
 								compareDownloadedFiles(destFile, System.getProperty("user.dir")
@@ -237,14 +247,15 @@ public class RequestPage extends BaseTest {
 		reader2.close();
 		return areEqual;
 	}
-	
-	
-	//Rajesh
+
+	// Rajesh
 	public void selectShowcolumnOptionButton() throws InterruptedException {
 		getfluentWait(requestsTab);
 		requestsTab.click();
 		getfluentWait(showColumnsButton);
 		showColumnsButton.click();
+
+		// log.error(showColumnsButton);
 		Thread.sleep(1000);
 		// selectDropDownOption(showColumnsButton, "Check all", "Text");
 	}
@@ -261,10 +272,20 @@ public class RequestPage extends BaseTest {
 
 			WebElement selectOpt = li_tags.get(optionIndex);
 			selectOpt.click();
-
+			// log.error(selectOpt);
 		}
 
 	}
 
+	public void downloadRequests() {
+		requestsTab.click();
+		getfluentWait(downloadRequestButton);
+		downloadRequestButton.click();
+		getfluentWait(requestDownload);
+		requestDownload.click();
+		requestCancelButton.click();
+		
+
+	}
 
 }

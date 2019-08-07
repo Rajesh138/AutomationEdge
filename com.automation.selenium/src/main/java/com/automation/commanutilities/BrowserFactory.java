@@ -13,7 +13,7 @@ import org.testng.Reporter;
 
 public class BrowserFactory {
 	public WebDriver webDriver;
-	String folderpath="..\\com.automation.selenium\\src\\downloads";
+	String folderpath="C:\\git\\AE-Automation\\AutomationEdge\\com.automation.selenium\\src\\downloads";
 
 	public WebDriver startBrowser(String browserName, String URL) {
 		Reporter.log("=====Browser Session Started=====", true);

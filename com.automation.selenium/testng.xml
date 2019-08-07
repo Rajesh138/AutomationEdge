@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="AE_AutomatioTesting">
+<groups>
+
+<run>
+
+<include name="functional"></include>
+<exclude name=""></exclude>
+
+</run>
+
+</groups>
+  <test name="Test">
+    <classes>
+      <class name="com.automation.testscript.AELoginTestScript"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
