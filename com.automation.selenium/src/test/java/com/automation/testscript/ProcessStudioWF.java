@@ -1,9 +1,13 @@
 package com.automation.testscript;
 
+/**
+ * @author TejaswiniGawande
+ *
+ */
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
-import com.automation.base.BaseTest;
+import com.automation.commanutilities.BaseTest;
 import com.automation.sysAdminPages.AELoginPage;
 import com.automation.tenantAdmin.WorkflowPage;
 
@@ -14,7 +18,8 @@ public class ProcessStudioWF extends BaseTest {
 	  
 	@Test(priority = 1)
 	public void S017_loginTenantadmin() throws Exception {
-		getKey("S017");
+		loadTestData("/SysadminTestData");
+		getKey("S014");
 		AELoginPage aelogin = PageFactory.initElements(webDriver, AELoginPage.class);
 		aelogin.LoginAE();
 		clearHash();
@@ -28,21 +33,21 @@ public class ProcessStudioWF extends BaseTest {
 		WorkflowPage workflow = PageFactory.initElements(webDriver, WorkflowPage.class);
 		workflow.getWorkflowResult();
 	}
-	@Test(priority = 3)
+	//@Test(priority = 3)
 	public void PS_WF_Message() throws Exception {
 		getKey("WF002");
 		WorkflowPage workflow = PageFactory.initElements(webDriver, WorkflowPage.class);
 		workflow.getWorkflowResult();
 	}
-	@Test(priority = 4)
+	//@Test(priority = 4)
 	public void PS_WF_configRun() throws Exception {
 		getKey("WF003");
 		WorkflowPage workflow = PageFactory.initElements(webDriver, WorkflowPage.class);
 		workflow.getWorkflowResult();
 	}
-	@Test(priority = 5)
+	//@Test(priority = 5)
 	public void PS_WF_integer() throws Exception {
-		getKey("WF004");
+		getKey("WF005");
 		WorkflowPage workflow = PageFactory.initElements(webDriver, WorkflowPage.class);
 		workflow.getWorkflowResult();
 	}

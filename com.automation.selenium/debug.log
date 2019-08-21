@@ -30,3 +30,9 @@
 [0726/185630.023:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
 [0727/185630.054:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
 [0728/185630.065:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[0731/123247.377:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[0731/123352.334:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[0801/123247.423:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[0801/123352.361:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[0807/171026.754:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0807/171026.758:ERROR:exception_snapshot_win.cc(98)] thread ID 14000 not found in process

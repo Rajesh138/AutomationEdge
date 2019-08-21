@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="AE_AutomatioTesting">
-<groups>
-
-<run>
-
-<include name="functional"></include>
-<exclude name=""></exclude>
-
-</run>
-
-</groups>
-  <test name="Test">
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<!-- <suite name="Automation Framework">	
+  <test name="Sysadmin">
     <classes>
-      <class name="com.automation.testscript.AELoginTestScript"/>
+      <class name="com.automation.testscript.SysadminTestScript"/>
     </classes>
-  </test> <!-- Test -->
-</suite> <!-- Suite -->
+  </test> Test
+  
+</suite> Suite -->
+<suite name="Automation Framework" allow-return-values="true" verbose="10">
+  
+    <test name="Sysadmin">
+        <!-- <parameter name="testInterfaceXML" value="SearchInterface.xml"></parameter>
+        <parameter name="testSuiteXML" value="SearchTest.xml"></parameter>
+        <groups>
+            <run>
+                <include name="sample-tests" />
+            </run>
+        </groups> -->
+        <classes>
+            <class name="com.automation.testscript.SysadminTestScript"/>
+        </classes>
+    </test>
+</suite>
